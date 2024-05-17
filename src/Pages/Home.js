@@ -4,14 +4,14 @@ import NavBar from "../Components/NavBar";
 
 function Home(props) {
 
-    const [isLogin, setIsLogin] = useState(true);
-    function handleLogin() {
+    const [isLogin, setIsLogin] = useState(false);
+    const authentication = ()=>{
         setIsLogin(!isLogin);
     }
 
     return (
       <Fragment>
-          <NavBar handleLogin={handleLogin} isLogin={isLogin} />
+          <NavBar authentication={authentication} isLogin={isLogin} />
           <HomeTop/>
       </Fragment>
     );
