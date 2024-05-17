@@ -4,11 +4,14 @@ import '../src/Assets/CSS/Custom.css';
 import '../src/Assets/CSS/Global.css';
 import {Fragment} from "react";
 import Home from "./Pages/Home";
+import {Route, Routes} from "react-router-dom";
 
 function App() {
   return (
     <Fragment>
-        <Home/>
+        <Routes>
+            <Route path="/" element={<Home/>}/>
+        </Routes>
     </Fragment>
   );
 }
