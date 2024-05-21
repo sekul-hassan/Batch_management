@@ -1,14 +1,29 @@
 import React from 'react';
-import {Button, Modal} from "react-bootstrap";
+import {Button, Container, Form, Modal, Row} from "react-bootstrap";
 
 function CreateBatch({handleCreateBatch,createBatch}) {
 
     return (
-        <Modal show={createBatch} onHide={handleCreateBatch} className="fade carousel-fade">
+        <Modal show={true} onHide={handleCreateBatch} className="fade carousel-fade">
             <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Please complete your batch information.</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+            <Modal.Body>
+
+                <Container>
+                    <Form>
+                        <Row>
+                           <Form.Group>
+                               <Form.Label>Enter your batch name : </Form.Label>
+                               <Form.Control required={true} type="text" placeholder="Name" onChange={handleCreateBatch} />
+                           </Form.Group>
+                        </Row>
+                    </Form>
+                </Container>
+
+
+
+            </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleCreateBatch}>
                     Close
