@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Container, Form, Modal, Row } from 'react-bootstrap';
 
-function CreateBatch({ handleCreateBatch }) {
+function CreateBatch({ handleCreateBatch, createBatch }) {
 
     const [batch, setBatch] = useState({
         name:'',
@@ -29,7 +29,7 @@ function CreateBatch({ handleCreateBatch }) {
     });
 
     return (
-        <Modal show={true} onHide={handleCreateBatch} className="fade carousel-fade">
+        <Modal show={createBatch} onHide={handleCreateBatch} className="fade carousel-fade">
             <Container>
                 <Row>
                     <Modal.Header closeButton>
@@ -88,8 +88,7 @@ function CreateBatch({ handleCreateBatch }) {
                                 <Form.Control
                                     required={true}
                                     type="file"
-                                    placeholder="Batch email"
-                                    name="batchEmail"
+                                    name="profilePic"
                                     onChange={handleInputChange}
                                 />
                             </Form.Group>
@@ -98,19 +97,18 @@ function CreateBatch({ handleCreateBatch }) {
                                 <Form.Control
                                     required={true}
                                     type="file"
-                                    placeholder="Batch email"
-                                    name="batchEmail"
+                                    name="coverPhoto"
                                     onChange={handleInputChange}
                                 />
                             </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCreateBatch}>
+                        <Button variant="outline-danger" className="btn-outline-danger w-12" onClick={handleCreateBatch}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleSubmit}>
-                            Save Changes
+                        <Button variant="outline-secondary" className="btn-outline-success w-12" onClick={handleSubmit}>
+                            Submit
                         </Button>
                     </Modal.Footer>
                 </Row>

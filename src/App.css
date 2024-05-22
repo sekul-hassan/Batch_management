@@ -30,3 +30,6 @@
 .form-control{
   box-shadow: none !important;
 }
+.w-12{
+  width: 75px!important;
+}

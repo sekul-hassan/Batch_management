@@ -43,6 +43,9 @@
     color: #ffffff!important;
     height: 45px;
     text-align: center;
+    /*border: 1px dotted antiquewhite;*/
+    padding: 12px 5px 12px 5px !important;
+    margin: 0 !important;
 }
 .navLink:hover{
     text-decoration: none;
@@ -50,10 +53,7 @@
     border: 1px dotted antiquewhite;
     transition-duration: 1s!important;
 }
-.nav-link:active{
-    color: antiquewhite!important;
-    background-color: rgba(255, 255, 255, 1)!important;
-}
+
 .logo{
 
 }
