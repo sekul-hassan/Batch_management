@@ -27,3 +27,6 @@
 .modal-content{
   overflow: hidden !important;
 }
+.form-control{
+  box-shadow: none !important;
+}
