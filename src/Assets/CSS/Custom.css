@@ -57,3 +57,35 @@
 .logo{
 
 }
+.globalBackground{
+    background-image: url("../Images/background.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 30vh;
+    width: 100%;
+    margin-top: -50px;
+}
+.globalBackgroundOverlay{
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.35);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 30vh;
+    width: 100%;
+    margin-top: -50px;
+}
+.profileDiv{
+    position:absolute;
+    left: calc(100% - 185px);
+    bottom: 8%;
+}
+.profilePic{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    cursor: pointer;
+}

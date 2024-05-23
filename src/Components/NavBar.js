@@ -1,10 +1,13 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useContext, useState} from 'react';
 import {Nav, Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import CreateBatch from "./ModalComponents/CreateBatch";
 import Login from "./ModalComponents/Login";
+import PermissionContext from "../Importance/PermissionContext";
 
-function NavBar({handleAuthentication,handleLogin,isLogin}) {
+function NavBar() {
+
+    const {handleLogin,handleAuthentication} = useContext(PermissionContext);
 
     const [createBatch, setCreateBatch] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
