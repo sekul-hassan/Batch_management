@@ -1,13 +1,13 @@
 import React from 'react';
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { Button,Container, Table } from "react-bootstrap";
 
 function Members(props) {
 
     const isAdmin = localStorage.getItem('isAdmin');
 
     return (
-        <Container style={{ overflowX: 'auto' }}>
-            <Table striped hover bordered hoverColor="gray">
+        <Container fluid="true" className="overflow-x-auto mt-2 px-4">
+            <Table className="boxWidth" striped bordered hover variant="dark">
                 <thead>
                 <tr>
                     <th>SL</th>
@@ -31,16 +31,50 @@ function Members(props) {
                     <td></td>
                     {isAdmin === 'true' && (
                         <td>
-                            <Container>
-                                <Row>
-                                    <Col md={6} sm={6} lg={6}>
-                                        <Button>Delete</Button>
-                                    </Col>
-                                    <Col md={6} sm={6} lg={6}>
-                                        <Button>Update</Button>
-                                    </Col>
-                                </Row>
-                            </Container>
+                            <Button variant="outline-danger" className="w-12 mx-1">Delete</Button>
+                            <Button variant="outline-light" className="w-12">Update</Button>
+                        </td>
+                    )}
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>XYZ</td>
+                    <td>01824340471</td>
+                    <td>XYZ.stu2019@gmail.com</td>
+                    <td>Mymenshingh</td>
+                    <td></td>
+                    {isAdmin === 'true' && (
+                        <td>
+                            <Button variant="outline-danger" className="w-12 mx-1">Delete</Button>
+                            <Button variant="outline-light" className="w-12">Update</Button>
+                        </td>
+                    )}
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>ABC</td>
+                    <td>01824340471</td>
+                    <td>ABC.stu2019@gmail.com</td>
+                    <td>Mymenshingh</td>
+                    <td></td>
+                    {isAdmin === 'true' && (
+                        <td>
+                            <Button variant="outline-danger" className="w-12 mx-1">Delete</Button>
+                            <Button variant="outline-light" className="w-12">Update</Button>
+                        </td>
+                    )}
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>CED</td>
+                    <td>01824340471</td>
+                    <td>CDE.stu2019@gmail.com</td>
+                    <td>Mymenshingh</td>
+                    <td></td>
+                    {isAdmin === 'true' && (
+                        <td>
+                            <Button variant="outline-danger" className="w-12 mx-1">Delete</Button>
+                            <Button variant="outline-light" className="w-12">Update</Button>
                         </td>
                     )}
                 </tr>

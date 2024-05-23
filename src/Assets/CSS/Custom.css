@@ -80,7 +80,7 @@
 }
 .profileDiv{
     position:absolute;
-    left: calc(100% - 185px);
+    /*left: calc(100% - 185px);*/
     bottom: 8%;
 }
 .profilePic{
@@ -88,4 +88,7 @@
     height: 150px;
     border-radius: 50%;
     cursor: pointer;
+}
+.boxWidth{
+    min-width: max-content;
 }
