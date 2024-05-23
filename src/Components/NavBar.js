@@ -4,10 +4,12 @@ import {Link} from "react-router-dom";
 import CreateBatch from "./ModalComponents/CreateBatch";
 import Login from "./ModalComponents/Login";
 
-function NavBar({handleAuthentication,isAuthentic,handleLogin,isLogin}) {
+function NavBar({handleAuthentication,handleLogin,isLogin}) {
 
     const [createBatch, setCreateBatch] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
+    const isPermission = localStorage.getItem("isPermission");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
 
     const handleCreateBatch = () => {
         setCreateBatch(!createBatch);
@@ -16,7 +18,6 @@ function NavBar({handleAuthentication,isAuthentic,handleLogin,isLogin}) {
     const handleShowLogin = () => {
         setShowLogin(!showLogin);
     }
-
 
     return (
        <Fragment>
@@ -29,27 +30,27 @@ function NavBar({handleAuthentication,isAuthentic,handleLogin,isLogin}) {
                        <Nav.Link>  <Link className="text-decoration-none navLink" to="/">Home</Link></Nav.Link>
 
                        {
-                           !isAuthentic ? (
+                           !isPermission ? (
                                <Fragment>
                                    <Nav.Link>  <Link className="text-decoration-none navLink" to="/">JUCSE</Link></Nav.Link>
                                    <Nav.Link>  <Link className="text-decoration-none navLink" to="/">CSE29</Link></Nav.Link>
-                                   <Nav.Link onClick={handleAuthentication}><Link className="text-decoration-none navLink" to="/">Permission</Link></Nav.Link>
+                                   <Nav.Link onClick={()=>handleAuthentication(true)}><Link className="text-decoration-none navLink" to="/">Permission</Link></Nav.Link>
                                </Fragment>
                            ):(
                                <Fragment>
                                    {
-                                       !isLogin ? (
+                                       !isLoggedIn ? (
                                            <Fragment>
                                                <Nav.Link onClick={handleCreateBatch}><Link className="text-decoration-none navLink" to="/">Create</Link></Nav.Link>
                                                <Nav.Link onClick={handleShowLogin}><Link className="text-decoration-none navLink" to="/">Login</Link></Nav.Link>
-                                               <Nav.Link onClick={handleAuthentication}><Link className="text-decoration-none navLink" to="/">Return</Link></Nav.Link>
+                                               <Nav.Link onClick={()=>handleAuthentication(false)}><Link className="text-decoration-none navLink" to="/">Return</Link></Nav.Link>
                                            </Fragment>
                                        ):(
                                            <Fragment>
                                                <Nav.Link><Link className="text-decoration-none navLink" to="/members">Members</Link></Nav.Link>
                                                <Nav.Link><Link className="text-decoration-none navLink" to="/">Courses</Link></Nav.Link>
-                                               <Nav.Link onClick={handleLogin}><Link className="text-decoration-none navLink" to="/">Logout</Link></Nav.Link>
-                                               <Nav.Link onClick={handleAuthentication}><Link className="text-decoration-none navLink" to="/">Return</Link></Nav.Link>
+                                               <Nav.Link onClick={()=>handleLogin(false)}><Link className="text-decoration-none navLink" to="/">Logout</Link></Nav.Link>
+                                               <Nav.Link onClick={()=>handleAuthentication(false)}><Link className="text-decoration-none navLink" to="/">Return</Link></Nav.Link>
 
                                            </Fragment>
                                        )

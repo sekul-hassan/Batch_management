@@ -8,17 +8,30 @@ function Home(props) {
     const [isLogin, setIsLogin] = useState(false);
     const [isAuthentic, setAuthentic] = useState(false);
 
-    const handleLogin = ()=>{
+    const handleLogin = (e)=>{
+        if(e===true){
+            localStorage.setItem('isLoggedIn','true');
+        }
+        else{
+            localStorage.removeItem('isLoggedIn');
+        }
         setIsLogin(!isLogin);
+        console.log(e);
     }
 
-    const handleAuthentication = ()=>{
+    const handleAuthentication = (e)=>{
+        if(e===true){
+            localStorage.setItem('isPermission',"true")
+        }
+        else{
+            localStorage.removeItem("isPermission");
+        }
         setAuthentic(!isAuthentic);
     }
 
     return (
       <Fragment>
-          <NavBar handleAuthentication={handleAuthentication} isAuthentic={isAuthentic} handleLogin={handleLogin} isLogin={isLogin} />
+          <NavBar handleAuthentication={handleAuthentication} handleLogin={handleLogin} isLogin={isLogin} />
           <HomeTop/>
           <Footer/>
       </Fragment>

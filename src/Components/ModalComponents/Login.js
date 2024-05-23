@@ -15,7 +15,7 @@ function Login({showLogin, handleShowLogin, handleLogin}) {
 
     const loginSubmit = (e)=>{
         e.preventDefault();
-        handleLogin();
+        handleLogin(true);
         handleShowLogin();
     }
 
