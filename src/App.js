@@ -7,6 +7,7 @@ import Home from "./Pages/Home";
 import {Route, Routes} from "react-router-dom";
 import MemberPage from "./Pages/MemberPage";
 import PermissionContext from "./Importance/PermissionContext";
+import CoursePage from "./Pages/CoursePage";
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="members" element={<MemberPage/>}/>
+            <Route path="courses" element={<CoursePage/>}/>
         </Routes>
     </PermissionContext.Provider>
   );
