@@ -79,16 +79,31 @@
     margin-top: -50px;
 }
 .profileDiv{
-    position:absolute;
-    /*left: calc(100% - 185px);*/
-    bottom: 8%;
+    display: flex;
+}
+.addBtn{
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .profilePic{
+    position:absolute;
+    bottom: 5%;
+    right: 3%;
     width: 150px;
     height: 150px;
     border-radius: 50%;
     cursor: pointer;
 }
 .boxWidth{
-    min-width: max-content;
+    min-width: max-content!important;
+}
+.tdImage{
+    width: 100%;
+    height: auto;
+    max-width: 50px;
+    border-radius: 50%;
 }
