@@ -1,9 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import NavBar from "../Components/NavBar";
 import GlobalBackground from "../Components/GlobalBackground";
-import Footer from "../Components/Footer";
 import CourseList from "../Components/CourseList";
-import CRInfo from "../Components/CRInfo";
+import Footer from "../Components/Footer";
 
 function CoursePage(props) {
 
@@ -13,13 +12,12 @@ function CoursePage(props) {
     const text = "Add Course";
 
     return (
-        <Fragment>
-            <NavBar/>
-            <GlobalBackground handleShowGlobal={handleShowGlobal} show={showAddCourses} text={text}/>
-            <CourseList/>
-            <CRInfo/>
-            <Footer/>
-        </Fragment>
+       <Fragment>
+           <NavBar/>
+           <GlobalBackground handleShowGlobal={handleShowGlobal} show={showAddCourses} text={text}/>
+           <CourseList/>
+           <Footer/>
+       </Fragment>
     );
 }
 

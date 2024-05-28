@@ -51,7 +51,7 @@ function NavBar() {
                                        ):(
                                            <Fragment>
                                                <Nav.Link><Link className="text-decoration-none navLink" to="/members">Members</Link></Nav.Link>
-                                               <Nav.Link><Link className="text-decoration-none navLink" to="/courses">Courses</Link></Nav.Link>
+                                               <Nav.Link><Link className="text-decoration-none navLink" to="/semester">Semester</Link></Nav.Link>
                                                <Nav.Link onClick={()=>handleLogin(false)}><Link className="text-decoration-none navLink" to="/">Logout</Link></Nav.Link>
                                                <Nav.Link onClick={()=>handleAuthentication(false)}><Link className="text-decoration-none navLink" to="/">Return</Link></Nav.Link>
 
