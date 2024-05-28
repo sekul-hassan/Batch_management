@@ -9,6 +9,7 @@ import MemberPage from "./Pages/MemberPage";
 import PermissionContext from "./Importance/PermissionContext";
 import SemesterPage from "./Pages/SemesterPage";
 import CoursePage from "./Pages/CoursePage";
+import CourseDetails from "./Pages/CourseDetails";
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/members" element={<MemberPage/>}/>
             <Route path="/semester" element={<SemesterPage/>}/>
             <Route path="/semester/:id" element={<CoursePage/>}/>
+            <Route path="/semester/:id/:course" element={<CourseDetails/>}/>
         </Routes>
     </PermissionContext.Provider>
   );
