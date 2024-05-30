@@ -24,7 +24,7 @@ function NavBar() {
 
     return (
        <Fragment>
-           <Navbar sticky="top" expand="md" className="bg-body-tertiary navBody">
+           <Navbar sticky="top" expand="sm" className="bg-body-tertiary navBody">
                <Navbar.Brand href="#home"><span className="logo boldTitle text-white">VENTINOVS</span></Navbar.Brand>
                <Navbar.Toggle aria-controls="basic-navbar-nav" />
                <Navbar.Collapse id="basic-navbar-nav">
