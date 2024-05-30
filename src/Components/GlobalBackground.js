@@ -10,14 +10,15 @@ function GlobalBackground({handleShowGlobal,text,show}) {
           <Container fluid="true" className="globalBackground">
               <Row className="globalBackgroundOverlay">
                   <div className="profileDiv">
-                      <Button onClick={handleShowGlobal} variant="outline-light" className="addBtn btn-dark">{text}</Button>
+                      <Button onClick={handleShowGlobal} variant="outline-dark" className="addBtn btn-light title3">{text}</Button>
                       <img className="profilePic" src="https://juniv.edu/images/logo-ju-small.png" alt=""/>
                   </div>
               </Row>
           </Container>
           {
               text === "Add Member" ? <AddMember showAddMember={show} handleShowAddMember={handleShowGlobal} />:
-                  text === "Add Course" ?  <AddCourses showAddCourse={show}  handleShowAddCourse={handleShowGlobal}/>:""
+                  text === "Semester" ?  <AddCourses showAddCourse={show}  handleShowAddCourse={handleShowGlobal}/>:
+                      text === "Add Course" ? <AddCourses showAddCourse={show}  handleShowAddCourse={handleShowGlobal}/>:""
           }
 
 

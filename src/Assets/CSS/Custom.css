@@ -85,9 +85,9 @@
     position: absolute;
     width: 150px;
     height: 40px;
-    top: 50%;
+    top: 58%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -58%);
 }
 .profilePic{
     position:absolute;
@@ -106,4 +106,8 @@
     height: auto;
     max-width: 50px;
     border-radius: 50%;
+}
+.crPic{
+    width: 100%;
+    height: auto;
 }

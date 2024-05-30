@@ -42,7 +42,7 @@ function AddCourses({showAddCourse,handleShowAddCourse}) {
                                 <Form.Control
                                     required={true}
                                     type="text"
-                                    placeholder="Course title"
+                                    placeholder="CourseList title"
                                     name="title"
                                     value={courses.title}
                                     onChange={handleInputChange}
@@ -54,7 +54,7 @@ function AddCourses({showAddCourse,handleShowAddCourse}) {
                                 <Form.Control
                                     required={true}
                                     type="text"
-                                    placeholder="Course code"
+                                    placeholder="CourseList code"
                                     name="code"
                                     value={courses.code}
                                     onChange={handleInputChange}

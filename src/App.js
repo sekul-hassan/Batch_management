@@ -7,7 +7,9 @@ import Home from "./Pages/Home";
 import {Route, Routes} from "react-router-dom";
 import MemberPage from "./Pages/MemberPage";
 import PermissionContext from "./Importance/PermissionContext";
+import SemesterPage from "./Pages/SemesterPage";
 import CoursePage from "./Pages/CoursePage";
+import CourseDetails from "./Pages/CourseDetails";
 
 function App() {
 
@@ -41,8 +43,10 @@ function App() {
     <PermissionContext.Provider value={{handleLogin,handleAuthentication}}>
         <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="members" element={<MemberPage/>}/>
-            <Route path="courses" element={<CoursePage/>}/>
+            <Route path="/members" element={<MemberPage/>}/>
+            <Route path="/semester" element={<SemesterPage/>}/>
+            <Route path="/semester/:id" element={<CoursePage/>}/>
+            <Route path="/semester/:id/:course" element={<CourseDetails/>}/>
         </Routes>
     </PermissionContext.Provider>
   );
