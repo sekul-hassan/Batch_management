@@ -4,6 +4,7 @@ import GlobalBackground from "../Components/GlobalBackground";
 import Footer from "../Components/Footer";
 import SemesterList from "../Components/SemesterList";
 import CRInfo from "../Components/CRInfo";
+import GlobalForm from "../Components/ModalComponents/GlobalForm";
 
 function SemesterPage(props) {
 
@@ -17,6 +18,7 @@ function SemesterPage(props) {
             <NavBar/>
             <GlobalBackground handleShowGlobal={handleShowGlobal} show={showAddCourses} text={text}/>
             <SemesterList/>
+            <GlobalForm/>
             <CRInfo/>
             <Footer/>
         </Fragment>
