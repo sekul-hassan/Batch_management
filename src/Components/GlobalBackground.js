@@ -1,9 +1,8 @@
 import React, {Fragment} from 'react';
 import {Button, Container, Row} from "react-bootstrap";
-import AddMember from "./ModalComponents/AddMember";
-import AddCourses from "./ModalComponents/AddCourses";
 
-function GlobalBackground({handleShowGlobal,text,show}) {
+
+function GlobalBackground({handleShowGlobal,text}) {
 
     return (
       <Fragment>
@@ -15,11 +14,11 @@ function GlobalBackground({handleShowGlobal,text,show}) {
                   </div>
               </Row>
           </Container>
-          {
-              text === "Add Member" ? <AddMember showAddMember={show} handleShowAddMember={handleShowGlobal} />:
-                  text === "Semester" ?  <AddCourses showAddCourse={show}  handleShowAddCourse={handleShowGlobal}/>:
-                      text === "Add Course" ? <AddCourses showAddCourse={show}  handleShowAddCourse={handleShowGlobal}/>:""
-          }
+          {/*{*/}
+          {/*    text === "Add Member" ? <AddMember showAddMember={show} handleShowAddMember={handleShowGlobal} />:*/}
+          {/*        text === "Semester" ?  <ModalForm showAddCourse={show} handleShowAddCourse={handleShowGlobal}/>:*/}
+          {/*            text === "Add Course" ? <ModalForm showAddCourse={show} handleShowAddCourse={handleShowGlobal}/>:""*/}
+          {/*}*/}
 
 
       </Fragment>
