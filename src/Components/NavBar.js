@@ -2,24 +2,25 @@ import React, {Fragment, useContext, useState} from 'react';
 import {Nav, Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import CreateBatch from "./ModalComponents/CreateBatch";
-import Login from "./ModalComponents/Login";
 import PermissionContext from "../Importance/PermissionContext";
+import CreateLoginContext from "../Importance/CreateLoginContext";
 
 function NavBar() {
 
-    const {handleLogin,handleAuthentication} = useContext(PermissionContext);
-
+    const {handleAuthentication} = useContext(PermissionContext);
+    const{handleShowLogin} = useContext(CreateLoginContext)
     const [createBatch, setCreateBatch] = useState(false);
-    const [showLogin, setShowLogin] = useState(false);
+    const[refresh,setRefresh] = useState(false);
+
     const isPermission = localStorage.getItem("isPermission");
     const isLoggedIn = localStorage.getItem("isLoggedIn");
 
     const handleCreateBatch = () => {
         setCreateBatch(!createBatch);
     }
-
-    const handleShowLogin = () => {
-        setShowLogin(!showLogin);
+    const logOut = () => {
+        localStorage.removeItem("isLoggedIn");
+        setRefresh(!refresh);
     }
 
     return (
@@ -52,7 +53,7 @@ function NavBar() {
                                            <Fragment>
                                                <Nav.Link><Link className="text-decoration-none navLink" to="/members">Members</Link></Nav.Link>
                                                <Nav.Link><Link className="text-decoration-none navLink" to="/semester">Semester</Link></Nav.Link>
-                                               <Nav.Link onClick={()=>handleLogin(false)}><Link className="text-decoration-none navLink" to="/">Logout</Link></Nav.Link>
+                                               <Nav.Link onClick={logOut}><Link className="text-decoration-none navLink" to="/">Logout</Link></Nav.Link>
                                                <Nav.Link onClick={()=>handleAuthentication(false)}><Link className="text-decoration-none navLink" to="/">Return</Link></Nav.Link>
 
                                            </Fragment>
@@ -65,10 +66,7 @@ function NavBar() {
                    </Nav>
                </Navbar.Collapse>
            </Navbar>
-
            <CreateBatch createBatch={createBatch} handleCreateBatch={handleCreateBatch} />
-           <Login handleShowLogin={handleShowLogin} showLogin={showLogin} handleLogin={handleLogin} />
-
        </Fragment>
     );
 }

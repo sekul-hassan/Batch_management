@@ -3,7 +3,7 @@ import {Button, Container, Modal, Row} from "react-bootstrap";
 import GlobalForm from "./GlobalForm";
 
 
-function ModalForm({show,handleShow,submitSemester,formData}) {
+function ModalForm({show,handleShow,handleSubmit,formData}) {
 
     return (
         <Modal show={show} onHide={handleShow} className="fade carousel-fade">
@@ -19,7 +19,7 @@ function ModalForm({show,handleShow,submitSemester,formData}) {
                         <Button variant="outline-danger" className="btn-outline-danger w-12" onClick={handleShow}>
                             Close
                         </Button>
-                        <Button variant="outline-secondary" className="btn-outline-success" onClick={submitSemester} >
+                        <Button variant="outline-secondary" className="btn-outline-success" onClick={handleSubmit} >
                             Submit
                         </Button>
                     </Modal.Footer>

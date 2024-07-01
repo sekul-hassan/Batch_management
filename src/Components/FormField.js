@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from "react-bootstrap";
 
-function FormField({ item}) {
+function FormField({ item }) {
     return (
         <Form.Group className="mt-2">
             <Form.Label>{item.label}</Form.Label>
@@ -17,11 +17,10 @@ function FormField({ item}) {
                     </Form.Control>
                 ) : (
                     <Form.Control
-                        required={item.required || false}
+                        required
                         type={item.type}
                         placeholder={item.placeholder || ''}
                         name={item.name}
-                        value={item.value || ''}
                         onChange={item.inputChange}
                     />
                 )

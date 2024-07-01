@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../src/Assets/CSS/Custom.css';
 import '../src/Assets/CSS/Global.css';
-import {useState} from "react";
+import React, {useState} from "react";
 import Home from "./Pages/Home";
 import {Route, Routes} from "react-router-dom";
 import MemberPage from "./Pages/MemberPage";
@@ -10,25 +10,45 @@ import PermissionContext from "./Importance/PermissionContext";
 import SemesterPage from "./Pages/SemesterPage";
 import CoursePage from "./Pages/CoursePage";
 import CourseDetails from "./Pages/CourseDetails";
+import CreateLoginContext from "./Importance/CreateLoginContext";
+import ModalForm from "./Components/ModalComponents/ModalForm";
+import axios from "axios";
+import {toast} from "react-toastify";
+import Toast from "./Components/ModalComponents/Toast";
 
 function App() {
 
-    const [isLogin, setIsLogin] = useState(false);
     const [isAuthentic, setAuthentic] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [login, setLogin] = useState({
+        email:'',
+        password:'',
+    });
 
+    const inputChange = (e) =>{setLogin({...login, [e.target.name]: e.target.value});}
     const handleLogin = (e)=>{
-        if(e===true){
-            localStorage.setItem('isLoggedIn','true');
-            localStorage.setItem('isAdmin','true');
-        }
-        else{
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('isAdmin');
-        }
-        setIsLogin(!isLogin);
-        console.log(e);
+        e.preventDefault();
+        axios.post("http://localhost:5000/api/batch/login",login).then(res=>{
+            if(res){
+                localStorage.setItem('isLoggedIn','true');
+                localStorage.setItem('isAdmin','true');
+                setShowLogin(!showLogin);
+                toast.success("Login is success.")
+            }
+        }).catch(err=>{
+            if(err.response.status === 404){
+                toast.error('Email or password is incorrect.');
+            }
+            else if(err.response.status === 400){
+                toast.error('All fields are required.');
+            }
+            else{
+                toast.error('Internal Server Error. Please try again later.');
+            }
+        })
     }
 
+    const handleShowLogin = () => setShowLogin(!showLogin);
     const handleAuthentication = (e)=>{
         if(e===true){
             localStorage.setItem('isPermission',"true")
@@ -39,15 +59,40 @@ function App() {
         setAuthentic(!isAuthentic);
     }
 
+    const loginData = [
+        {
+            label: "Enter batch email",
+            type:"email",
+            required: true,
+            placeholder: "Batch E-mail",
+            name: "email",
+            inputChange: inputChange,
+            value: login.email,
+        },
+        {
+            label: "Enter batch password",
+            type:"password",
+            required: true,
+            placeholder: "Batch password",
+            name: "password",
+            inputChange: inputChange,
+            value: login.email,
+        },
+    ]
+
   return (
     <PermissionContext.Provider value={{handleLogin,handleAuthentication}}>
-        <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/members" element={<MemberPage/>}/>
-            <Route path="/semester" element={<SemesterPage/>}/>
-            <Route path="/semester/:id" element={<CoursePage/>}/>
-            <Route path="/semester/:id/:course" element={<CourseDetails/>}/>
-        </Routes>
+       <CreateLoginContext.Provider value={{handleShowLogin}}>
+           <Routes>
+               <Route path="/" element={<Home/>}/>
+               <Route path="/members" element={<MemberPage/>}/>
+               <Route path="/semester" element={<SemesterPage/>}/>
+               <Route path="/semester/:id" element={<CoursePage/>}/>
+               <Route path="/semester/:id/:course" element={<CourseDetails/>}/>
+           </Routes>
+           <Toast/>
+           <ModalForm show={showLogin} handleShow={handleShowLogin} handleSubmit={handleLogin} formData={loginData}/>
+       </CreateLoginContext.Provider>
     </PermissionContext.Provider>
   );
 }

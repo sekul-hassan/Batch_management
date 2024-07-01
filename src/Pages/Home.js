@@ -5,6 +5,7 @@ import Footer from "../Components/Footer";
 import AddMember from "../Components/ModalComponents/AddMember";
 
 function Home(props) {
+
     return (
       <Fragment>
           <NavBar/>

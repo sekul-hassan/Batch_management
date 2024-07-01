@@ -5,14 +5,17 @@ import Footer from "../Components/Footer";
 import SemesterList from "../Components/SemesterList";
 import CRInfo from "../Components/CRInfo";
 import ModalForm from "../Components/ModalComponents/ModalForm";
+import axios from "axios";
 
 
 function SemesterPage(props) {
 
+    /// batchId will find local storage when i login
     const[semester, setSemester] = useState({
         semester:'',
         mcrName:'',
         fcrName:'',
+        batchId:1,
         mcrPhoto:null,
         fcrPhoto:null
     });
@@ -22,14 +25,38 @@ function SemesterPage(props) {
     const text = "Semester";
 
     const inputChange = (e) => {
-        setSemester((prevState)=>({
-            ...prevState,
-            [e.target.name]: e.target.value
-        }))
+        const { name, type, value, files } = e.target;
+
+        if (type === 'file') {
+            setSemester((prevState) => ({
+                ...prevState,
+                [name]: files[0]
+            }));
+        } else {
+            setSemester((prevState) => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
     }
 
-    const submitSemester = (e)=>{
+    const submitSemester = (e) => {
         e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("data", JSON.stringify(semester)); // Convert the data object to a JSON string
+        formData.append('mcrPhoto', semester.mcrPhoto);
+        formData.append("fcrPhoto", semester.fcrPhoto);
+
+        axios.post("http://localhost:5000/api/semester/addSemester", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        }).then((res) => {
+            console.log(res.data);
+        }).catch((err) => {
+            console.log(err);
+        });
         console.log(semester);
     }
 
@@ -95,7 +122,7 @@ function SemesterPage(props) {
             <NavBar/>
             <GlobalBackground handleShowGlobal={handleShowSemester} text={text}/>
             <SemesterList/>
-            <ModalForm show={showSemester} handleShow={handleShowSemester} submitSemester={submitSemester} formData={AddSemester}/>
+            <ModalForm show={showSemester} handleShow={handleShowSemester} handleSubmit={submitSemester} formData={AddSemester}/>
             <CRInfo/>
             <Footer/>
         </Fragment>
