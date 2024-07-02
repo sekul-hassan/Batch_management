@@ -1,7 +1,7 @@
 import React from 'react';
-import {Slide, ToastContainer} from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
 
-function Toast(props) {
+function Toast() {
     return (
         <ToastContainer
             position="top-right"
