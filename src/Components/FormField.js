@@ -16,8 +16,7 @@ function FormField({ item }) {
             {
                 item.type === "select" ? (
                     <>
-                        <Form.Control as="select" {...register(item.name, { required: item.required })} defaultValue="">
-                            <option value="" disabled>Select an option</option>
+                        <Form.Control as="select" {...register(item.name, { required: item.required })} >
                             {
                                 item.option.map((option) => (
                                     <option key={option.id} value={option.value}>{option.value}</option>

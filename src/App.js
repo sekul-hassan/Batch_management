@@ -27,12 +27,11 @@ function App() {
     const handleLogin = async (e) => {
         try {
             const res = await axios.post("http://localhost:5000/api/batch/login", e);
-            if (res) {
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('isAdmin', 'true');
-                setShowLogin(false);
-                toast.success("Login is successful.");
-            }
+
+            localStorage.setItem('isLoggedIn', res.data.batch.id);
+            localStorage.setItem('isAdmin', 'true');
+            setShowLogin(false);
+            toast.success("Login is successful.");
         } catch (err) {
             if (err.response.status === 404) {
                 toast.error('Email or password is incorrect.');

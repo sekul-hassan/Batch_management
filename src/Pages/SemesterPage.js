@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import NavBar from "../Components/NavBar";
 import GlobalBackground from "../Components/GlobalBackground";
 import Footer from "../Components/Footer";
@@ -6,124 +6,82 @@ import SemesterList from "../Components/SemesterList";
 import CRInfo from "../Components/CRInfo";
 import ModalForm from "../Components/ModalComponents/ModalForm";
 import axios from "axios";
+import AddSemester from "../Components/ForData/AddSemester";
+import {toast} from "react-toastify";
 
 
 function SemesterPage(props) {
 
-    /// batchId will find local storage when i login
-    const[semester, setSemester] = useState({
-        semester:'',
-        mcrName:'',
-        fcrName:'',
-        batchId:1,
-        mcrPhoto:null,
-        fcrPhoto:null
-    });
     const [showSemester,setShowSemester] = useState(false);
-
+    const[semesters, setSemesters] = useState([]);
+    const batchId = localStorage.getItem('isLoggedIn');
     const handleShowSemester = () => {setShowSemester(!showSemester);}
     const text = "Semester";
 
-    const inputChange = (e) => {
-        const { name, type, value, files } = e.target;
-
-        if (type === 'file') {
-            setSemester((prevState) => ({
-                ...prevState,
-                [name]: files[0]
-            }));
-        } else {
-            setSemester((prevState) => ({
-                ...prevState,
-                [name]: value
-            }));
-        }
-    }
-
     const submitSemester = (e) => {
-        e.preventDefault();
-
         const formData = new FormData();
-        formData.append("data", JSON.stringify(semester)); // Convert the data object to a JSON string
-        formData.append('mcrPhoto', semester.mcrPhoto);
-        formData.append("fcrPhoto", semester.fcrPhoto);
+        formData.append("data", JSON.stringify(e));
+        formData.append("batchId", batchId);
+        formData.append('mcrPhoto', e.mcrPhoto);
+        formData.append("fcrPhoto", e.fcrPhoto);
 
         axios.post("http://localhost:5000/api/semester/addSemester", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             }
         }).then((res) => {
-            console.log(res.data);
+            console.log(res.status===201);
+            toast.success("New semester creation is successful.");
         }).catch((err) => {
+            if(err.response && err.response.status === 404) {
+                toast.error("Batch not found.");
+            }
+            else if(err.response && err.response.status === 400) {
+                toast.error("All fields are required.");
+            }
+            else if(err.response && err.response.status === 409) {
+                toast.error("This semester already exist.");
+            }
+           else{
+                toast.error("Internal Server Error. Please try again later.");
+            }
             console.log(err);
         });
-        console.log(semester);
+
     }
 
-    const AddSemester = [
-        {
-            label: "Select a semester",
-            type:"select",
-            name: "semester",
-            inputChange: inputChange,
-            value: semester.name,
-            option:[
-                {id:1, value: "1st year 1st semester"},
-                {id:2, value: "1st year 2nd semester"},
-                {id:3, value: "2st year 1st semester"},
-                {id:4, value: "2st year 2nd semester"},
-                {id:5, value: "3rd year 1st semester"},
-                {id:6, value: "3rd year 2nd semester"},
-                {id:7, value: "4th year 1st semester"},
-                {id:8, value: "4th year 2nd semester"},
-            ]
-        },
-        {
-            label: "CR name (male)",
-            type:"text",
-            required: true,
-            placeholder: "Beda CR",
-            name: "mcrName",
-            inputChange: inputChange,
-            value: semester.mcrName,
-        },
-        {
-            label: "CR name (female)",
-            type:"text",
-            required: true,
-            placeholder: "Bedi CR",
-            name: "fcrName",
-            inputChange: inputChange,
-            value: semester.fcrName
-        },
-        {
-            label: "CR photo (male)",
-            type:"file",
-            required: true,
-            placeholder: "Beda CR",
-            name: "mcrPhoto",
-            inputChange: inputChange,
-            value: semester.mcrPhoto,
-        },
-        {
-            label: "CR photo (female)",
-            type:"file",
-            required: true,
-            placeholder: "Bedi CR",
-            name: "fcrPhoto",
-            inputChange: inputChange,
-            value: semester.fcrPhoto,
-        },
+    useEffect(() => {
+        axios.get("http://localhost:5000/api/semester/getSemesters",{
+            headers:{
+                "batchid":batchId,
+            }
+        }).then((res) => {
+            const sortedSemesters = res.data.sort((a, b) => {
+                const semesterA = a.semester.toLowerCase();
+                const semesterB = b.semester.toLowerCase();
+                if (semesterA < semesterB) {
+                    return -1;
+                }
+                if (semesterA > semesterB) {
+                    return 1;
+                }
+                return 0;
+            });
+            setSemesters(sortedSemesters);
+        }).catch((err) => {
+            // Handle error
+            console.error("Error fetching semesters:", err);
+        });
+    }, [batchId]); // Only depend on batchId here
 
-    ]
 
     return (
         <Fragment>
             <NavBar/>
             <GlobalBackground handleShowGlobal={handleShowSemester} text={text}/>
-            <SemesterList/>
+            <SemesterList semesters={semesters}/>
             <ModalForm show={showSemester} handleShow={handleShowSemester} handleSubmit={submitSemester} formData={AddSemester}/>
-            <CRInfo/>
+            <CRInfo semesters={semesters}/>
             <Footer/>
         </Fragment>
     );
