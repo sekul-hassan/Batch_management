@@ -20,15 +20,9 @@ function App() {
 
     const [isAuthentic, setAuthentic] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
-    const [login, setLogin] = useState({
-        email:'',
-        password:'',
-    });
 
-    const inputChange = (e) =>{setLogin({...login, [e.target.name]: e.target.value});}
     const handleLogin = (e)=>{
-        e.preventDefault();
-        axios.post("http://localhost:5000/api/batch/login",login).then(res=>{
+        axios.post("http://localhost:5000/api/batch/login",e).then(res=>{
             if(res){
                 localStorage.setItem('isLoggedIn','true');
                 localStorage.setItem('isAdmin','true');
@@ -66,8 +60,6 @@ function App() {
             required: true,
             placeholder: "Batch E-mail",
             name: "email",
-            inputChange: inputChange,
-            value: login.email,
         },
         {
             label: "Enter batch password",
@@ -75,8 +67,6 @@ function App() {
             required: true,
             placeholder: "Batch password",
             name: "password",
-            inputChange: inputChange,
-            value: login.email,
         },
     ]
 

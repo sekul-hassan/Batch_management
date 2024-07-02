@@ -1,28 +1,35 @@
 import React from 'react';
 import { Form } from "react-bootstrap";
+import { useFormContext } from 'react-hook-form';
 
 function FormField({ item }) {
+    const { register, formState: { errors } } = useFormContext();
+
     return (
         <Form.Group className="mt-2">
             <Form.Label>{item.label}</Form.Label>
             {
                 item.type === "select" ? (
-                    <Form.Control as="select" onChange={item.inputChange} name={item.name} defaultValue="">
-                        <option value={item.value} disabled>Select an option</option>
-                        {
-                            item.option.map((option) => (
-                                <option key={option.id} value={option.value}>{option.value}</option>
-                            ))
-                        }
-                    </Form.Control>
+                    <>
+                        <Form.Control as="select" {...register(item.name, { required: item.required })} defaultValue="">
+                            <option value="" disabled>Select an option</option>
+                            {
+                                item.option.map((option) => (
+                                    <option key={option.id} value={option.value}>{option.value}</option>
+                                ))
+                            }
+                        </Form.Control>
+                        {errors[item.name] && <p className="text-danger">This field is required</p>}
+                    </>
                 ) : (
-                    <Form.Control
-                        required
-                        type={item.type}
-                        placeholder={item.placeholder || ''}
-                        name={item.name}
-                        onChange={item.inputChange}
-                    />
+                    <>
+                        <Form.Control
+                            {...register(item.name, { required: item.required })}
+                            type={item.type}
+                            placeholder={item.placeholder || ''}
+                        />
+                        {errors[item.name] && <p className="text-danger">This field is required</p>}
+                    </>
                 )
             }
         </Form.Group>
