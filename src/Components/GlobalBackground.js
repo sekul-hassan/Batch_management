@@ -18,7 +18,8 @@ function GlobalBackground({handleShowGlobal,text,show}) {
           {
               text === "Add Member" ? <AddMember showAddMember={show} handleShowAddMember={handleShowGlobal} />:
                   text === "Semester" ?  <AddCourses showAddCourse={show}  handleShowAddCourse={handleShowGlobal}/>:
-                      text === "Add Course" ? <AddCourses showAddCourse={show}  handleShowAddCourse={handleShowGlobal}/>:""
+                      text === "Add Course" ? <AddCourses showAddCourse={show}  handleShowAddCourse={handleShowGlobal}/>:
+                        text === "Add Details" ? <AddCourses showAddCourse={show}  handleShowAddCourse={handleShowGlobal}/>:""
           }
 
 

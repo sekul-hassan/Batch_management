@@ -29,7 +29,7 @@ function CreateBatch({ handleCreateBatch, createBatch }) {
     });
 
     return (
-        <Modal show={createBatch} onHide={handleCreateBatch} className="fade carousel-fade">
+        <Modal show={createBatch} onHide={handleCreateBatch} className="fade carousel-fade pb-5">
             <Container>
                 <Row>
                     <Modal.Header closeButton>

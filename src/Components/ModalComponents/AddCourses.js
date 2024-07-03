@@ -15,7 +15,7 @@ function AddCourses({showAddCourse,handleShowAddCourse}) {
     }
 
     return (
-        <Modal show={showAddCourse} onHide={handleShowAddCourse} className="fade carousel-fade">
+        <Modal show={showAddCourse} onHide={handleShowAddCourse} className="fade carousel-fade pb-5 overflow-y-auto">
             <Container>
                 <Row>
                     <Modal.Header closeButton>

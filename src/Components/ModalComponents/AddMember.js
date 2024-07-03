@@ -17,7 +17,7 @@ function AddMember({showAddMember,handleShowAddMember}) {
     }
 
     return (
-        <Modal show={showAddMember} onHide={handleShowAddMember} className="overflow-hidden">
+        <Modal show={showAddMember} onHide={handleShowAddMember} className="fade carousel-fade pb-5">
             <Container>
                 <Row>
                     <Modal.Header closeButton>
