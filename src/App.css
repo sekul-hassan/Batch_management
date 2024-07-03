@@ -20,9 +20,19 @@
 .modal-backdrop{
   opacity: 0.1 !important;
 }
+.modal-dialog{
+  margin: 0 auto !important;
+  overflow: auto !important;
+}
 .modal{
+<<<<<<< HEAD
   margin-top: 50px!important;
   padding-right: 0!important;
+=======
+  margin-top: 60px!important;
+  padding: 10px !important;
+  overflow: auto;
+>>>>>>> e52eab1bd306b5460586e853227a0646be761476
 }
 .modal-content{
   overflow: hidden !important;
@@ -32,4 +42,24 @@
 }
 .w-12{
   width: 75px!important;
+}
+.toastCustom{
+  margin-top: 70px!important;
+  max-width: 300px!important;
+}
+
+.loading-container{
+  width: 100%;
+  height: 100%;
+  text-align: right;
+  padding-right: 10px;
+}
+#root{
+  overflow-x: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+*, ::after, ::before {
+  box-sizing: border-box!important;
 }
