@@ -1,24 +1,37 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Container, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import axios from "axios";
 
-function CourseList(props) {
+function CourseList({reload}) {
+    const[courses,setCourses] = useState(null);
+    const batchId = localStorage.getItem("isLoggedIn")
+    const {id} = useParams();
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/api/course/allCourse",{
+            headers: {
+                "batchid": batchId,
+                "semesterId": id,
+            }
+        }).then((res) => {
+            setCourses(res.data.course);
+        }).catch((err) => {
+            console.error(err.response.status);
+        });
+    }, [batchId, id,reload]);
+
     return (
         <Container className="mt-3">
             <Row>
-                <Button as={Link} to={`/semester/${"1-1"}/${"mathe"}`} variant="outline-dark" className="mt-2 title3">
-                    CSE-110 ( Course title here )
-                </Button>
-                <Button as={Link} to={`/semester/${"1-1"}/${"mathe"}`} variant="outline-dark" className="mt-2 title3">
-                    CSE-111 ( Course title here )
-                </Button>
-                <Button variant="outline-dark" className="mt-2 title3">CSE-111 ( Course title here )</Button>
-               <Button variant="outline-dark" className="mt-2 title3">CSE-112 ( Course title here )</Button>
-               <Button variant="outline-dark" className="mt-2 title3">CSE-113 ( Course title here )</Button>
-               <Button variant="outline-dark" className="mt-2 title3">CSE-114 ( Course title here )</Button>
-               <Button variant="outline-dark" className="mt-2 title3">CSE-115 ( Course title here )</Button>
-               <Button variant="outline-dark" className="mt-2 title3">CSE-116 ( Course title here )</Button>
-               <Button variant="outline-dark" className="mt-2 title3">CSE-117 ( Course title here )</Button>
+                {
+                    courses && courses.map((course,idx)=>(
+                        <Button as={Link} to={`/semester/${id}/${course.title}`} variant="outline-dark" className="mt-2 title3">
+                            {course.title} <span className="text-uppercase">( {course.code} )</span>
+                        </Button>
+
+                    ))
+                }
             </Row>
         </Container>
     );

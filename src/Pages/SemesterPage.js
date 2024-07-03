@@ -14,6 +14,7 @@ function SemesterPage(props) {
 
     const [showSemester,setShowSemester] = useState(false);
     const[semesters, setSemesters] = useState([]);
+    const[reload,setReload] = useState(false);
     const batchId = localStorage.getItem('isLoggedIn');
     const handleShowSemester = () => {setShowSemester(!showSemester);}
     const text = "Semester";
@@ -31,6 +32,7 @@ function SemesterPage(props) {
             }
         }).then((res) => {
             console.log(res.status===201);
+            setReload(!reload)
             toast.success("New semester creation is successful.");
         }).catch((err) => {
             if(err.response && err.response.status === 404) {
@@ -72,7 +74,7 @@ function SemesterPage(props) {
             // Handle error
             console.error("Error fetching semesters:", err);
         });
-    }, [batchId]);
+    }, [batchId,reload]);
 
     return (
         <Fragment>

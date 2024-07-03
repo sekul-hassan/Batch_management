@@ -25,14 +25,9 @@
   overflow: auto !important;
 }
 .modal{
-<<<<<<< HEAD
-  margin-top: 50px!important;
-  padding-right: 0!important;
-=======
-  margin-top: 60px!important;
+  margin-top: 0px!important;
   padding: 10px !important;
   overflow: auto;
->>>>>>> e52eab1bd306b5460586e853227a0646be761476
 }
 .modal-content{
   overflow: hidden !important;

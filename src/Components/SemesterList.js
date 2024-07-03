@@ -10,7 +10,7 @@ function SemesterList({semesters}) {
                 {
                     semesters && semesters.map((semester, index) => (
                         <Col md={6} lg={6} sm={12}>
-                            <Button as={Link} to={`/semester/${"2-1"}`} variant="outline-dark" className="mt-2 w-100 btn-light title3">{semester.semester}</Button>
+                            <Button as={Link} to={`/semester/${index+1}`} variant="outline-dark" className="mt-2 w-100 btn-light title3">{semester.semester}</Button>
                         </Col>
                     ))
                 }
