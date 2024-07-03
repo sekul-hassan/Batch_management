@@ -72,8 +72,7 @@ function SemesterPage(props) {
             // Handle error
             console.error("Error fetching semesters:", err);
         });
-    }, [batchId]); // Only depend on batchId here
-
+    }, [batchId]);
 
     return (
         <Fragment>
@@ -81,7 +80,7 @@ function SemesterPage(props) {
             <GlobalBackground handleShowGlobal={handleShowSemester} text={text}/>
             <SemesterList semesters={semesters}/>
             <ModalForm show={showSemester} handleShow={handleShowSemester} handleSubmit={submitSemester} formData={AddSemester}/>
-            <CRInfo semesters={semesters}/>
+            <CRInfo semesters={semesters[0]}/>
             <Footer/>
         </Fragment>
     );

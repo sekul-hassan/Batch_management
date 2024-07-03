@@ -49,3 +49,12 @@
   text-align: right;
   padding-right: 10px;
 }
+#root{
+  overflow-x: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+*, ::after, ::before {
+  box-sizing: border-box!important;
+}
