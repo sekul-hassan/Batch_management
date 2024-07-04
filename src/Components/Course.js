@@ -1,24 +1,37 @@
 import React from 'react';
 import { Container, Row } from "react-bootstrap";
-import ct from "../Assets/Images/ct.jpg";
-import labUrl from "../Assets/Images/report.pdf";
 
-function Course(props) {
+function Course({ courses }) {
+
+    const getFileExtension = (url) => {
+        return url.split('.').pop().split(/[#?]/)[0];
+    }
 
     return (
-        <Container className="mt-3">
-            <Row>
-                <h3 className="title text-center">ct-1</h3>
-                <img className="crPic mt-3" src={ct} alt=""/>
-                <h3 className="title text-center mt-3">Note from labib</h3>
-                <iframe
-                    src={labUrl}
-                    title="PDF Viewer"
-                    width="95%"
-                    height="750px"
-                    className="mt-3"
-                />
-            </Row>
+        <Container className="mt-2">
+            {
+                courses && courses.map((course, idx) => {
+                    const fileExtension = getFileExtension(course.image);
+                    return (
+                        <Row key={idx}>
+                            <h3 className="title text-center mt-3">{course.description}</h3>
+                            {
+                                fileExtension === 'pdf' || fileExtension === 'doc' || fileExtension === 'docx' || fileExtension === 'ppt' ? (
+                                    <iframe
+                                        src={course.image}
+                                        title="Document Viewer"
+                                        width="95%"
+                                        height="750px"
+                                        className="mt-3"
+                                    />
+                                ) : (
+                                    <img className="crPic mt-3" src={course.image} alt=""/>
+                                )
+                            }
+                        </Row>
+                    );
+                })
+            }
         </Container>
     );
 }

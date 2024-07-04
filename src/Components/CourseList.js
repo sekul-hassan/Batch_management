@@ -26,7 +26,7 @@ function CourseList({reload}) {
             <Row>
                 {
                     courses && courses.map((course,idx)=>(
-                        <Button as={Link} to={`/semester/${id}/${course.title}`} variant="outline-dark" className="mt-2 title3">
+                        <Button as={Link} to={`/semester/${id}/${course.id}`} variant="outline-dark" className="mt-2 title3">
                             {course.title} <span className="text-uppercase">( {course.code} )</span>
                         </Button>
 
