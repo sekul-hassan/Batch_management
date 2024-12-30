@@ -30,6 +30,7 @@ function CoursePage(props) {
            toast.success("Course added success.")
        }).catch((err)=>{
            console.log(err.response.status);
+           console.log(err);
            if(err.response.status===500){
                toast.error("Internal server error. Please try later.")
            }else{
