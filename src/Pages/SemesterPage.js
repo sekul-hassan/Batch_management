@@ -6,8 +6,8 @@ import SemesterList from "../Components/SemesterList";
 import CRInfo from "../Components/CRInfo";
 import ModalForm from "../Components/ModalComponents/ModalForm";
 import axios from "axios";
-import AddSemester from "../Components/ForData/AddSemester";
 import {toast} from "react-toastify";
+import updateCRInfoData from "../Components/ForData/UpdateCRInfoData";
 
 
 function SemesterPage(props) {
@@ -18,6 +18,7 @@ function SemesterPage(props) {
     const batchId = localStorage.getItem('isLoggedIn');
     const handleShowSemester = () => {setShowSemester(!showSemester);}
     const text = "Semester";
+    const addSemesterModalText = "Add new semester";
 
     const submitSemester = (e) => {
         const formData = new FormData();
@@ -81,8 +82,8 @@ function SemesterPage(props) {
             <NavBar/>
             <GlobalBackground handleShowGlobal={handleShowSemester} text={text}/>
             <SemesterList semesters={semesters}/>
-            <ModalForm show={showSemester} handleShow={handleShowSemester} handleSubmit={submitSemester} formData={AddSemester}/>
-            <CRInfo semesters={semesters[0]}/>
+            <ModalForm title={addSemesterModalText} show={showSemester} handleShow={handleShowSemester} handleSubmit={submitSemester} formData={updateCRInfoData}/>
+            <CRInfo semesters={semesters}/>
             <Footer/>
         </Fragment>
     );

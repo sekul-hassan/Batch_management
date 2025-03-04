@@ -1,30 +1,51 @@
-import React from 'react';
-import {Button, Container, Form, Modal, Row} from "react-bootstrap";
+import React, { useState } from 'react';
+import { Button, Container, Form, Modal, Row } from "react-bootstrap";
 
-function AddMember({showAddMember,handleShowAddMember}) {
-
-    const[member, setMember] = React.useState({
-        name:'',
-        phone:'',
-        email:'',
-        district:'',
-        profilePic:null,
+function AddMember({ show, handleShowAddMember, text }) {
+    const [member, setMember] = useState({
+        name: '',
+        phone: '',
+        email: '',
+        district: '',
+        profilePic: null,
     });
 
-    const handleInputChange = (e)=>{
-        const {name,value} = e.target;
-        setMember(prev => ({...prev, [name]:value}));
-    }
+    const handleInputChange = (e) => {
+        const { name, value, files } = e.target;
+
+        setMember((prev) => ({
+            ...prev,
+            [name]: files ? files[0] : value, // Use `files[0]` for file input
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+
+        for (const key in member) {
+            formData.append(key, member[key]);
+        }
+
+        console.log('member:', member);
+
+        // Send formData to your API
+        // Example:
+        // fetch('/api/endpoint', {
+        //     method: 'POST',
+        //     body: formData,
+        // });
+    };
 
     return (
-        <Modal show={showAddMember} onHide={handleShowAddMember} className="fade carousel-fade pb-5">
+        <Modal show={show} onHide={handleShowAddMember} className="fade carousel-fade pb-5">
             <Container>
-                <Row>
-                    <Modal.Header closeButton>
-                        <Modal.Title className="title3">Please complete your batch information.</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form>
+                <Form onSubmit={handleSubmit}>
+                    <Row>
+                        <Modal.Header closeButton>
+                            <Modal.Title className="title3">{text}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
                             <Form.Group>
                                 <Form.Label>Enter name</Form.Label>
                                 <Form.Control
@@ -76,27 +97,32 @@ function AddMember({showAddMember,handleShowAddMember}) {
                                 <Form.Control
                                     required={true}
                                     type="file"
-                                    value={member.profilePic}
-                                    onChange={handleInputChange}
+                                    name="profilePic"
+                                    onChange={handleInputChange} // File input handled here
                                 />
                             </Form.Group>
-
-
-                        </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="outline-danger" className="btn-outline-danger w-12" onClick={handleShowAddMember}>
-                            Close
-                        </Button>
-                        <Button variant="outline-secondary" className="btn-outline-success w-12" onClick={()=>{}}>
-                            Submit
-                        </Button>
-                    </Modal.Footer>
-                </Row>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button
+                                variant="outline-danger"
+                                className="btn-outline-danger w-12"
+                                onClick={handleShowAddMember}
+                            >
+                                Close
+                            </Button>
+                            <Button
+                                type="submit"
+                                variant="outline-secondary"
+                                className="btn-outline-success w-12"
+                            >
+                                Submit
+                            </Button>
+                        </Modal.Footer>
+                    </Row>
+                </Form>
             </Container>
         </Modal>
     );
 }
 
 export default AddMember;
-
